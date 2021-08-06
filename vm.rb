@@ -1,7 +1,4 @@
 # このコードをコピペしてrubyファイルに貼り付け、そのファイルをirbでrequireして実行しましょう。
-
-# 例
-
 # irb
 # require  './vm.rb'
 # （↑のパスは、自動販売機ファイルが入っているパスを指定する）
@@ -29,8 +26,13 @@ class VendingMachine
     def initialize
       # 最初の自動販売機に入っている金額は0円
       @slot_money = 0
+      @stocks = {cola: 5}
     end
-  
+
+    def stocks
+      @stocks
+    end
+     
     # 投入金額の総計を取得できる。
     def current_slot_money
       # 自動販売機に入っているお金を表示する
@@ -46,7 +48,11 @@ class VendingMachine
       # 自動販売機にお金を入れる
       @slot_money += money
     end
-  
+
+    def purchase
+      if current_slot_money >= cola.price 
+    end
+      
     # 払い戻し操作を行うと、投入金額の総計を釣り銭として出力する。
     def return_money
       # 返すお金の金額を表示する
@@ -55,3 +61,28 @@ class VendingMachine
       @slot_money = 0
     end
   end
+    
+    class Drink
+      attr_reader :name, :price
+      # drink = [].freeze
+            
+      def initialize(name, price)
+        @name = name
+        @price = price
+      end
+
+      def self.cola
+        self.new( 'cola', 120 )
+      end
+           
+      def slot_money(drink)
+        return false unless Drink.include?(drink)
+        @drink += drink
+      end
+
+      def return_drink
+       puts @drink
+        @drink = 0
+      end
+    end
+  
