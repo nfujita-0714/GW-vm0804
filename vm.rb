@@ -50,8 +50,14 @@ class VendingMachine
     end
 
     def purchase
-      if current_slot_money >= cola.price 
-    end
+      if current_slot_money >= cola.price
+        puts '飲み物を選んでください'
+        puts '1.コーラ'
+        input_drink = gets
+      else
+        puts 'お金が足りません！もっと入れてください'
+        end
+      end
       
     # 払い戻し操作を行うと、投入金額の総計を釣り銭として出力する。
     def return_money
@@ -64,8 +70,7 @@ class VendingMachine
     
     class Drink
       attr_reader :name, :price
-      # drink = [].freeze
-            
+                  
       def initialize(name, price)
         @name = name
         @price = price
@@ -85,4 +90,12 @@ class VendingMachine
         @drink = 0
       end
     end
+
+    # 投入金額、在庫の点で、コーラが購入できるかどうかを取得できる。
+    # ジュース値段以上の投入金額が投入されている条件下で購入操作を行うと、ジュースの在庫を減らし、売り上げ金額を増やす。
+    # 投入金額が足りない場合もしくは在庫がない場合、購入操作を行っても何もしない。
+    # 現在の売上金額を取得できる。
+    # 払い戻し操作では現在の投入金額からジュース購入金額を引いた釣り銭を出力する。
+    # 注意：責務が集中していませんか？責務が多すぎると思ったら分けてみましょう    
+    
   
